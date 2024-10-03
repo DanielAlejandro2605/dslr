@@ -20,11 +20,8 @@ def sigmoid_function(z : np.ndarray) -> np.ndarray:
 
 def compute_cost_ft(data_x : np.ndarray, data_y : np.ndarray, weigths : np.ndarray):
     # Training examples
-    # print(data_y.shape)
     data_y = data_y.flatten()
-    # print(data_y.shape)
     m = len(data_y)
-
     # Predictions
     predictions = sigmoid_function(np.dot(data_x, weigths))
     # Cost functions
@@ -47,12 +44,8 @@ def logistic_regression(data_x: np.ndarray, data_y: np.ndarray, house : str, tol
         # Performing predictions
         predictions = sigmoid_function(np.dot(data_x, w))
         # Perfoming derivatives for gradient descent decision
-
         dj_dw = derivative_of_w(predictions, data_x, data_y)
-
         # New array of weigths
-
-
         new_w = w - learning_rate * dj_dw
         # Computing costs for plot
         if i % 1000 == 0:

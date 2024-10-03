@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import curses
 import time
+import sys
 
 # Import logistic regression and prediction
 from logistic_regression.main import logistic_regression, predict
@@ -92,14 +93,9 @@ def select_features(list_courses : list):
                     chosen_courses.append(combinaison)
                 else:
                     curses.wrapper(lambda stdscr: show_temp_message(stdscr, "This combination has already been chosen"))
-                    # print("This combinaison has already been chosen")
-                    # time.sleep(2)
                     continue
             else:
                 curses.wrapper(lambda stdscr: show_temp_message(stdscr, "The classes chosen must be different"))
-
-                # print("The classes chosen must be different")
-                # time.sleep(2)
                 continue
         else:
             if feature not in chosen_courses:
@@ -107,6 +103,7 @@ def select_features(list_courses : list):
             else:
                 curses.wrapper(lambda stdscr: show_temp_message(stdscr, "This feature has already been chosen"))
                 print("This feature has already been chosen")
+    
     if not chosen_courses:
         print("no courses were chosen")
         return
@@ -116,17 +113,15 @@ def select_features(list_courses : list):
 
 def main():
     try:
+        file_data_train = sys.argv[1]
         # Reading data
-        df = pd.read_csv('../datasets/dataset_train.csv')
+        df = pd.read_csv(file_data_train)
         # Get name of Hogwarts classes
         unique_houses = df['Hogwarts House'].unique()
         # Getting all the columns with numeric values
         numeric_df = select_numeric_columns(df)
         # Getting names of the numeric columns
         list_courses = [column for column in numeric_df.columns if column != "Index" and column != "Hogwarts House"]
-
-        print(unique_houses)
-
 
         features =  select_features(list_courses)
         if not features:

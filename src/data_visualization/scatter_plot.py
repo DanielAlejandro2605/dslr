@@ -88,7 +88,7 @@ def main():
         list_features : list =  ['All grades scatter plots', 'grades', 'mean', 'std', 'min', '25%', '50%', '75%', 'max']
         
         while True:
-            feature = curses.wrapper(lambda stdscr: prompt(stdscr, list_features, "Choose feature class:\n", False))
+            feature = curses.wrapper(lambda stdscr: prompt(stdscr, list_features, [], "Choose feature class:\n", False))
             if feature == 'EXIT':
                 return
             
@@ -96,19 +96,14 @@ def main():
                 generate_all_the_scatter_plots_of_grades(house_classes_data, list_courses)
                 exit()
 
-            first_class = curses.wrapper(lambda stdscr: prompt(stdscr, list_courses, "Choose first class:\n", False))
+            first_class = curses.wrapper(lambda stdscr: prompt(stdscr, list_courses, [], "Choose first class:\n", False))
             if first_class == 'EXIT':
                 return
-            second_class = curses.wrapper(lambda stdscr: prompt(stdscr, list_courses, "Choose second class:\n", False))
+            second_class = curses.wrapper(lambda stdscr: prompt(stdscr, list_courses, [], "Choose second class:\n", False))
             if second_class == 'EXIT':
                 return
             # Validating classes choices
             if first_class != second_class:
-                normalized_choice = curses.wrapper(lambda stdscr: prompt(stdscr, ['Yes', 'No'], "Normalized data?\n", False))
-                if normalized_choice == "Yes":
-                    normalized_data_flag = True
-                elif normalized_choice == 'EXIT':
-                    return
                 break
             else:
                 print("The classes choised must be different")

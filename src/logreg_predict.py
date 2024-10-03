@@ -3,7 +3,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-from main import prepare_data_X
+from logreg_train import prepare_data_X
 from logistic_regression.main import predict
 from classes.ClassBinarizer import ClassBinarizer
 
@@ -17,14 +17,14 @@ def read_json(file_path):
 
 def main():
     
-    file_data_train = sys.argv[1]
+    file_data_test = sys.argv[1]
     file_weights = sys.argv[2]
 
-    df_train = pd.read_csv(file_data_train)
+    df_test = pd.read_csv(file_data_test)
 
     features, weights = read_json(file_weights)
 
-    data_x = prepare_data_X(features, df_train)
+    data_x = prepare_data_X(features, df_test)
 
     predictions_list = []
     house_list = []
@@ -47,7 +47,8 @@ def main():
 
     df_predictions = pd.DataFrame({'Hogwarts House': predictions_house})
     df_predictions.rename_axis('Index', inplace=True)
-    df_predictions.to_csv('./output/houses.csv')
+    df_predictions.to_csv('./output_csv/houses.csv')
+    print("Prediction file created ./output_csv/houses.csv")
     
 
 if __name__ == "__main__":

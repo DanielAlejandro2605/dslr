@@ -15,8 +15,7 @@ def evaluate(df : pd.DataFrame, predictions : np.ndarray):
     return score
 
 def save_feature_list(evaluate_score : int, features_list : list):
-    
-    # if evaluate_score >= 0.90:
+
     with open('evaluation_logs.txt', 'a+') as file:
         file.write(f"Score {evaluate_score} |  {features_list}\n")
 
