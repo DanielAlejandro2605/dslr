@@ -4,22 +4,22 @@ PIP = $(VENV)/bin/pip
 SHELL := /bin/bash
 
 all: install
-	$(PYTHON) -m logreg_predict ../datasets/dataset_test.csv evaluation_logs.json
+	@$(PYTHON) -m logreg_predict ../datasets/dataset_test.csv evaluation_logs.json
 
 train: install
-	$(PYTHON) -m logreg_train ../datasets/dataset_train.csv
+	@$(PYTHON) -m logreg_train ../datasets/dataset_train.csv
 
 describe: install
-	$(PYTHON) -m data_analysis.main
+	@$(PYTHON) -m data_analysis.main ../datasets/dataset_train.csv
 
 histogram: install
-	$(PYTHON) -m data_visualization.histogram
+	@$(PYTHON) -m data_visualization.histogram
 
 scatter_plot: install
-	$(PYTHON) -m data_visualization.scatter_plot
+	@$(PYTHON) -m data_visualization.scatter_plot
 
 pair_plot: install
-	$(PYTHON) -m data_visualization.pair_plot
+	@$(PYTHON) -m data_visualization.pair_plot
 
 install: $(VENV)/bin/activate
 

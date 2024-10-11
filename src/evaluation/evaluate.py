@@ -13,10 +13,3 @@ def evaluate(df : pd.DataFrame, predictions : np.ndarray):
     real_houses_values = df['Hogwarts House'].map(house_mapping).to_numpy()
     score = accuracy_score(real_houses_values, predictions)
     return score
-
-def save_feature_list(evaluate_score : int, features_list : list):
-
-    with open('evaluation_logs.txt', 'a+') as file:
-        file.write(f"Score {evaluate_score} |  {features_list}\n")
-
-

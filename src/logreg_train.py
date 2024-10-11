@@ -8,7 +8,7 @@ import sys
 from logistic_regression.main import logistic_regression, predict
 # Import evaluating function
 
-from evaluation.evaluate import evaluate, save_feature_list
+from evaluation.evaluate import evaluate
 # Import classes
 from classes.ClassBinarizer import ClassBinarizer
 from classes.Logger import Logger
@@ -131,7 +131,6 @@ def main():
 
         logger.set_features(features)
 
-
         data_X = prepare_data_X(features, numeric_df)
 
         raw_data_y = df['Hogwarts House'].to_numpy()
@@ -141,6 +140,7 @@ def main():
 
         predictions_list = []
         for house in unique_houses:
+            print(f"Training {house} vs others houses!")
             data_y_by_house = binarizer.binarize(raw_data_y, house)
             w, iterations = logistic_regression(data_X, data_y_by_house, house)
             logger.set_weigths_for_house(house, w)
